@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f396e4d80b9054bb11f62e8021d1f9, type: 3}
+  m_Name: p_Hero
+  m_EditorClassIdentifier: 
+  rpgClass: {fileID: 11400000, guid: a16b570f562a505438bfc7434b047528, type: 2}
+  animatorController: {fileID: 0}
+  sprite: {fileID: 0}
+  xpNeededByLevel:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
