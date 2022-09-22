@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: db343ed3c41d28d4c998fdd9a319f931
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pot: {fileID: 9140330776613777898, guid: 4fdc1d91a64784442b566c0c23a9cdba, type: 3}
+  - equipment: {fileID: 6791456399411082958, guid: 4fdc1d91a64784442b566c0c23a9cdba, type: 3}
+  - sign: {fileID: 6045678718551990494, guid: 4fdc1d91a64784442b566c0c23a9cdba, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
