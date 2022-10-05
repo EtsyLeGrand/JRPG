@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
+    private AsyncOperation asyncScene;
     private static SceneManager sceneManager;
 
     public static SceneManager instance
@@ -31,16 +32,30 @@ public class SceneManager : MonoBehaviour
     void Init()
     {
         DontDestroyOnLoad(instance);
+        EventManager.StartListening("FadeOutComplete", LoadPreparedScene);
     }
 
-    public static void PrepareScene(string sceneName)
+    private void PrepareScene(string sceneName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+        asyncScene = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+        asyncScene.allowSceneActivation = false;
     }
 
-    public static void ChangeScene(string destination, int difficulty, int regionid)
+    public static void ChangeScene(string destination, int fightDifficulty = 1, int regionid = 1)
     {
-        //Coroutine transition
-        UnityEngine.SceneManagement.SceneManager.LoadScene(destination);
+        EventManager.TriggerEvent("FadeToBlack", new Dictionary<string, object>());
+        instance.PrepareScene(destination);
+    }
+
+    public static void ChangeScene(string destination)
+    {
+        EventManager.TriggerEvent("FadeToBlack", new Dictionary<string, object>());
+        instance.PrepareScene(destination);
+    }
+
+    private void LoadPreparedScene(Dictionary<string, object> _)
+    {
+        asyncScene.allowSceneActivation = true;
+        EventManager.TriggerEvent("UndoFade", new Dictionary<string, object>());
     }
 }

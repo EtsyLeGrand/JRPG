@@ -7,8 +7,8 @@ public class MapCharacter : MonoBehaviour
 {
     [SerializeField] private float timeToReachSquare;
     [SerializeField] private float timeToWaitAtSquare;
-    private Vector2 targetPosition;
     private bool isMoving = false;
+    private bool haltQueue = false;
     private Queue<IEnumerator> movementQueue = new Queue<IEnumerator>();
     private const int QUEUE_MAX_SIZE = 3;
     private const float ENCOUNTER_CHANCE_BY_STEP = 0.5f;
@@ -23,39 +23,38 @@ public class MapCharacter : MonoBehaviour
 
     void Start()
     {
-        targetPosition = transform.position;
+
     }
 
     void Update()
     {
-        Vector2 targetBeforeMovement = targetPosition;
-
         #region Input Managing (WASD)
         if (movementQueue.Count < QUEUE_MAX_SIZE)
         {
+            Vector2 direction = Vector2.zero;
             if (Input.GetKeyDown(KeyCode.A))
             {
-                targetPosition = new Vector2(targetPosition.x - 2, targetPosition.y);
+                direction = Vector2.left;
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                targetPosition = new Vector2(targetPosition.x + 2, targetPosition.y);
+                direction = Vector2.right;
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
-                targetPosition = new Vector2(targetPosition.x, targetPosition.y + 2);
+                direction = Vector2.up;
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                targetPosition = new Vector2(targetPosition.x, targetPosition.y - 2);
+                direction = Vector2.down;
+            }
+
+            if (direction != Vector2.zero)
+            {
+                movementQueue.Enqueue(LerpMovement(direction));
             }
         }
         #endregion
-
-        if (targetBeforeMovement != targetPosition)
-        {
-            movementQueue.Enqueue(LerpMovement(targetPosition));
-        }
 
         HandleQueue();
     }
@@ -63,81 +62,63 @@ public class MapCharacter : MonoBehaviour
     private void HandleQueue()
     {
         // Monster Check + dungeon check
-
-
-        if (movementQueue.Count != 0 && !isMoving)
+        if (movementQueue.Count != 0 && !isMoving && !haltQueue)
         {
             StartCoroutine(movementQueue.Peek());
             movementQueue.Dequeue();
+            
         }
 
     }
 
-    private IEnumerator LerpMovement(Vector2 target)
+    private IEnumerator LerpMovement(Vector2 direction)
     {
         isMoving = true;
-        Vector2 targetDirection = Vector2.zero;
 
         #region Change Rotation and Get Direction
         Vector2 startPos = transform.position;
 
-        if (startPos.x > target.x) // Going Left
+        if (direction == Vector2.left)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            targetDirection = Vector2.left;
         }
-        else if (startPos.x < target.x) // Going Right
+        else if (direction == Vector2.right)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            targetDirection = Vector2.right;
+            transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
         }
-
-        if (startPos.y > target.y) // Going Down
-        {
-            targetDirection = Vector2.down;
-        }
-        else if (startPos.y < target.y) // Going Up
-        {
-            targetDirection = Vector2.up;
-
-        }
-
-        Debug.Log(targetDirection);
 
         #endregion
 
         #region Check for collision
 
-        collider.offset = 0.16f * targetDirection;
-        if (targetDirection == Vector2.right)
+        collider.offset = 0.16f * direction;
+        if (direction == Vector2.right)
         {
             collider.offset = -collider.offset;
         }
 
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask =~ LayerMask.NameToLayer("Bounds");
         List<Collider2D> results = new List<Collider2D>();
-        if (Physics2D.OverlapCollider(collider, filter, results) > 0)
+        if (Physics2D.OverlapCollider(collider, filter, results) > 0) // COLLIDED
         {
+            collider.offset = Vector2.zero;
+            isMoving = false;
             switch (LayerMask.LayerToName(results[0].gameObject.layer))
             {
                 #region Walls
                 case "Walls":
                 case "Default":
-                    collider.offset = Vector2.zero;
-                    targetPosition = transform.position;
-                    isMoving = false;
+                    
                     yield break;
 
                 #endregion
 
                 #region Water
                 case "Water": // À PRÉVOIR LE BOAT
-                    collider.offset = Vector2.zero;
-                    targetPosition = transform.position;
-                    isMoving = false;
+                    
                     yield break;
-
-                    #endregion
+                #endregion
             }
 
             Debug.Log(LayerMask.LayerToName(results[0].gameObject.layer));
@@ -148,24 +129,29 @@ public class MapCharacter : MonoBehaviour
 
         #region Lerp
         float timer = 0.0f;
+        Vector2 targetPos = new Vector2(transform.position.x, transform.position.y) + 2 * direction;
         while (timer < timeToReachSquare)
         {
             timer += Time.deltaTime;
-            transform.position = Vector2.Lerp(startPos, target, timer / timeToReachSquare);
+            transform.position = Vector2.Lerp(startPos, targetPos, timer / timeToReachSquare);
             yield return null;
         }
         yield return new WaitForSeconds(timeToWaitAtSquare);
-        isMoving = false;
-        #endregion
 
+        #endregion
+        /*
+        #region Fight
         totalEncounterChance += ENCOUNTER_CHANCE_BY_STEP;
         float rand = UnityEngine.Random.Range(0, 101);
 
         if (totalEncounterChance >= rand)
         {
             //Encounter
-            Debug.Log("Fight! + " + totalEncounterChance + " + " + rand);
-            //SceneManager.ChangeScene("Fight", 1, 1);
+            haltQueue = true;
+            SceneManager.ChangeScene("Fight", 1, 1);
         }
+        #endregion
+        */
+        isMoving = false;
     }
 }

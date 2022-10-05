@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToReachSquare: 0.1
+  timeToWaitAtSquare: 0.05
