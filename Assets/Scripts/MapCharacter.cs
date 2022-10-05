@@ -11,6 +11,8 @@ public class MapCharacter : MonoBehaviour
     private bool isMoving = false;
     private Queue<IEnumerator> movementQueue = new Queue<IEnumerator>();
     private const int QUEUE_MAX_SIZE = 3;
+    private const float ENCOUNTER_CHANCE_BY_STEP = 0.5f;
+    private float totalEncounterChance = 0.0f;
 
     private new BoxCollider2D collider;
 
@@ -155,5 +157,15 @@ public class MapCharacter : MonoBehaviour
         yield return new WaitForSeconds(timeToWaitAtSquare);
         isMoving = false;
         #endregion
+
+        totalEncounterChance += ENCOUNTER_CHANCE_BY_STEP;
+        float rand = UnityEngine.Random.Range(0, 101);
+
+        if (totalEncounterChance >= rand)
+        {
+            //Encounter
+            Debug.Log("Fight! + " + totalEncounterChance + " + " + rand);
+            //SceneManager.ChangeScene("Fight", 1, 1);
+        }
     }
 }
