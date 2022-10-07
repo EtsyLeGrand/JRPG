@@ -32,9 +32,13 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     public virtual void Awake()
     {
         if (instance)
+        {
             Destroy(gameObject);
+            Debug.Log("Instance Exists");
+        }
         else
         {
+            Debug.Log("Instance Doesn't exist");
             isClosed = false;
             instance = this as T;
             if (dontDestroy)

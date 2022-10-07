@@ -15,7 +15,6 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("down");
         textPos.position = new Vector3(defaultPos.x, defaultPos.y - 3);
     }
 

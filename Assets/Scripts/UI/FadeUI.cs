@@ -45,7 +45,6 @@ public class FadeUI : MonoBehaviour
         float timer = 0.0f;
         while (timer < fadeTime)
         {
-            Debug.Log("Running");
             timer += Time.deltaTime;
             blackFade.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, timer / fadeTime));
             yield return null;

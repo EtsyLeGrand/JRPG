@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapCharacter : MonoBehaviour
 {
@@ -21,9 +22,26 @@ public class MapCharacter : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
     }
 
-    void Start()
+    private void Start()
     {
+        Debug.Log("LOADED POS: " + GameManager.characterMapPosition);
+        transform.localPosition = GameManager.characterMapPosition;
+    }
 
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("LOADED POS: " + GameManager.characterMapPosition);
+        transform.localPosition = GameManager.characterMapPosition;
     }
 
     void Update()
@@ -66,7 +84,7 @@ public class MapCharacter : MonoBehaviour
         {
             StartCoroutine(movementQueue.Peek());
             movementQueue.Dequeue();
-            
+
         }
 
     }
@@ -98,7 +116,7 @@ public class MapCharacter : MonoBehaviour
         }
 
         ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask =~ LayerMask.NameToLayer("Bounds");
+        filter.layerMask = ~LayerMask.NameToLayer("Bounds");
         List<Collider2D> results = new List<Collider2D>();
         if (Physics2D.OverlapCollider(collider, filter, results) > 0) // COLLIDED
         {
@@ -109,16 +127,16 @@ public class MapCharacter : MonoBehaviour
                 #region Walls
                 case "Walls":
                 case "Default":
-                    
+
                     yield break;
 
                 #endregion
 
                 #region Water
                 case "Water": // À PRÉVOIR LE BOAT
-                    
+
                     yield break;
-                #endregion
+                    #endregion
             }
 
             Debug.Log(LayerMask.LayerToName(results[0].gameObject.layer));
@@ -139,7 +157,7 @@ public class MapCharacter : MonoBehaviour
         yield return new WaitForSeconds(timeToWaitAtSquare);
 
         #endregion
-        /*
+
         #region Fight
         totalEncounterChance += ENCOUNTER_CHANCE_BY_STEP;
         float rand = UnityEngine.Random.Range(0, 101);
@@ -148,10 +166,16 @@ public class MapCharacter : MonoBehaviour
         {
             //Encounter
             haltQueue = true;
+            Dictionary<string, object> args = new Dictionary<string, object>()
+            {
+                {"x", transform.localPosition.x},
+                {"y", transform.localPosition.y}
+            };
+            EventManager.TriggerEvent("RegisterNewMapPosition", args);
             SceneManager.ChangeScene("Fight", 1, 1);
         }
         #endregion
-        */
+
         isMoving = false;
     }
 }
