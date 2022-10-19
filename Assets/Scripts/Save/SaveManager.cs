@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     private static string Path => $"{Application.persistentDataPath}/Save/";
     private static string Extension => ".save";
@@ -36,28 +36,46 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public static void DeleteSave(int _index)
+    public static void DeleteSave(int index)
     {
-        if (File.Exists(GetSavePath(_index)))
+        if (File.Exists(GetSavePath(index)))
         {
-            File.Delete(GetSavePath(_index));
+            File.Delete(GetSavePath(index));
         }
     }
 
-    public static SaveData Load(int _index)
+    public static SaveData Load(int index)
     {
-        string fileContent = File.ReadAllText(GetSavePath(_index));
+        string fileContent = File.ReadAllText(GetSavePath(index));
         return JsonUtility.FromJson<SaveData>(fileContent);
     }
 
-    public static void Save(SaveData _saveData)
+    public static void Save(SaveData saveData)
     {
-        string contentJson = JsonUtility.ToJson(_saveData);
-        File.WriteAllText(GetSavePath(_saveData.index),contentJson);
+        string contentJson = JsonUtility.ToJson(saveData);
+        File.WriteAllText(GetSavePath(saveData.index),contentJson);
     }
 
-    public static string GetSavePath(int _indexSlot)
+    public static bool HasSaves()
     {
-        return $"{Path}Save_{_indexSlot}{Extension}";
+        foreach(SaveSlot slot in Instance.slots)
+        {
+            if (slot != null && slot.HasData())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void NewGame()
+    {
+        
+    }
+
+    public static string GetSavePath(int indexSlot)
+    {
+        return $"{Path}Save_{indexSlot}{Extension}";
     }
 }

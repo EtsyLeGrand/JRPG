@@ -6,20 +6,40 @@ using UnityEngine.UI;
 
 public class SaveSlot : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI saveName;
-    [SerializeField] private TextMeshProUGUI loadButtonText;
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
+    [SerializeField] private Sprite[] emptySaveSprite;
+    [SerializeField] private Sprite[] defaultSaveSprite;
+
     private int index;
     private SaveData saveData;
-    
-    public void SetSave(SaveData _saveData)
+
+    private void Start()
     {
-        saveData = _saveData;
+        Image thisImg = GetComponent<Image>();
+        Button thisBtn = GetComponent<Button>();
+
+        SpriteState tempState = thisBtn.spriteState;
+        thisBtn.transition = Selectable.Transition.SpriteSwap;
+
+        if (saveData != null)
+        {
+            thisImg.sprite = defaultSaveSprite[0];
+            tempState.pressedSprite = defaultSaveSprite[1];
+            thisBtn.spriteState = tempState;
+        }
+        else
+        {
+            thisImg.sprite = emptySaveSprite[0];
+            tempState.pressedSprite = emptySaveSprite[1];
+            thisBtn.spriteState = tempState;
+        }
+    }
+
+    public void SetSave(SaveData saveData)
+    {
+        this.saveData = saveData;
         index = saveData.index;
-        
-        saveName.text = $"Save {_saveData.index+1}";
-        loadButtonText.text = "Load";
         
         deleteButton.interactable = true;
         deleteButton.onClick.RemoveAllListeners();
@@ -29,12 +49,9 @@ public class SaveSlot : MonoBehaviour
         loadButton.onClick.AddListener(LoadGame);
     }
 
-    public void SetEmpty(int _slotIndex)
+    public void SetEmpty(int slotIndex)
     {
-        index = _slotIndex;
-        
-        saveName.text = "Empty";
-        loadButtonText.text = "New Game";
+        index = slotIndex;
 
         deleteButton.interactable = false;
         deleteButton.onClick.RemoveAllListeners();
@@ -51,7 +68,15 @@ public class SaveSlot : MonoBehaviour
 
     public void LoadGame()
     {
-        //Call GameManager LoadGame(saveData)
+        if (HasData())
+        {
+            GameManager.Instance.LoadGame(saveData);
+        }
+    }
+
+    public bool HasData()
+    {
+        return saveData != null;
     }
 
     public void CreateNewGame()

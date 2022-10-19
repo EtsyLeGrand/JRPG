@@ -3,26 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadeUI : MonoBehaviour
+public class FadeUI : Singleton<FadeUI>
 {
-    private static FadeUI instance;
-
     [SerializeField] private Image blackFade;
     [SerializeField] private float fadeTime = 1f;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {

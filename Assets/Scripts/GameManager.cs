@@ -29,7 +29,6 @@ public class GameManager : Singleton<GameManager>
         SaveData saveData = new SaveData()
         {
             index = index,
-            
             playerPosition = defaultCharacterMapPosition,
             //party = new List<CharacterInstance>(),
             //sceneName = "Overworld"
@@ -40,6 +39,13 @@ public class GameManager : Singleton<GameManager>
         characterMapPosition = saveData.playerPosition;
         
         //Start Game
+    }
+
+    public void LoadGame(SaveData saveData)
+    {
+        characterMapPosition = saveData.playerPosition;
+        if (!SceneManager.IsSceneLoaded("Map"))
+            SceneManager.ChangeScene("Map");
     }
 
     private static void SetNewMapCharacterPosition(Dictionary<string, object> args)

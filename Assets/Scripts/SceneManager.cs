@@ -3,35 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneManager : Singleton<SceneManager>
 {
     private AsyncOperation asyncScene;
-    private static SceneManager sceneManager;
-
-    public static SceneManager instance
+    void Start()
     {
-        get
-        {
-            if (!sceneManager)
-            {
-                sceneManager = FindObjectOfType(typeof(SceneManager)) as SceneManager;
-
-                if (!sceneManager)
-                {
-                    Debug.LogError("There needs to be one active SceneManager script on a GameObject in your scene.");
-                }
-                else
-                {
-                    sceneManager.Init();
-                }
-            }
-            return sceneManager;
-        }
-    }
-
-    void Init()
-    {
-        DontDestroyOnLoad(instance);
         EventManager.StartListening("FadeOutComplete", LoadPreparedScene);
     }
 
@@ -44,13 +20,18 @@ public class SceneManager : MonoBehaviour
     public static void ChangeScene(string destination, int fightDifficulty = 1, int regionid = 1)
     {
         EventManager.TriggerEvent("FadeToBlack", new Dictionary<string, object>());
-        instance.PrepareScene(destination);
+        Instance.PrepareScene(destination);
     }
 
     public static void ChangeScene(string destination)
     {
         EventManager.TriggerEvent("FadeToBlack", new Dictionary<string, object>());
-        instance.PrepareScene(destination);
+        Instance.PrepareScene(destination);
+    }
+
+    public static bool IsSceneLoaded(string scene)
+    {
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene;
     }
 
     private void LoadPreparedScene(Dictionary<string, object> _)
