@@ -10,28 +10,44 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button loadButton;
     [SerializeField] private Button quitButton;
 
-
     [SerializeField] private GameObject slotRegion;
-    [SerializeField] private Button[] slotButton;
-    [SerializeField] private Button[] deleteSlotButton;
     [SerializeField] private Button backButton;
+
+    private void Start()
+    {
+        EventManager.StartListening("SpawnLoadMenu", OnLoadButtonClicked);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("SpawnLoadMenu", OnLoadButtonClicked);
+    }
 
     public void OnPlayButtonClicked()
     {
-        /*
-        if (PlayerPrefs.HasKey("LastPlayedSlot"))
+        // TEMP
+        print(SaveManager.HasSaves());
+        if (!SaveManager.HasSaves())
         {
-            OnSaveSlotClicked(PlayerPrefs.GetInt("LastPlayedSlot"));
+            OnLoadButtonClicked();
         }
         else
         {
-
+            GameManager.Instance.LoadGame(
+                SaveManager.Load(PlayerPrefs.GetInt("LastPlayedSlot"))
+                );
         }
-        */
-        SceneManager.ChangeScene("Map");
     }
 
     public void OnLoadButtonClicked()
+    {
+        playButton.gameObject.SetActive(false);
+        loadButton.gameObject.SetActive(false);
+
+        slotRegion.SetActive(true);
+    }
+
+    public void OnLoadButtonClicked(Dictionary<string, object> _)
     {
         playButton.gameObject.SetActive(false);
         loadButton.gameObject.SetActive(false);
@@ -48,17 +64,6 @@ public class MainMenuUI : MonoBehaviour
 #endif
     }
 
-    public void OnSaveSlotClicked(int index)
-    {
-        
-        //PlayerPrefs.SetInt("LastPlayedSlot", index);
-    }
-
-    public void OnDeleteSaveSlotClicked(int index)
-    {
-
-    }
-
     public void OnBackButtonClicked()
     {
         playButton.gameObject.SetActive(true);
@@ -66,4 +71,6 @@ public class MainMenuUI : MonoBehaviour
 
         slotRegion.SetActive(false);
     }
+
+    
 }

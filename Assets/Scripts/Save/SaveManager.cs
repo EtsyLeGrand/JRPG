@@ -6,7 +6,7 @@ public class SaveManager : Singleton<SaveManager>
 {
     private static string Path => $"{Application.persistentDataPath}/Save/";
     private static string Extension => ".save";
-    
+
     [SerializeField] private List<SaveSlot> slots = new List<SaveSlot>();
 
     public void Start()
@@ -18,7 +18,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         if (!Directory.Exists(Path))
             Directory.CreateDirectory(Path);
-        
+
         for (int i = 0; i < slots.Count; i++)
         {
             string path = GetSavePath(i);
@@ -41,6 +41,7 @@ public class SaveManager : Singleton<SaveManager>
         if (File.Exists(GetSavePath(index)))
         {
             File.Delete(GetSavePath(index));
+            Instance.slots[index].DeleteSave();
         }
     }
 
@@ -53,14 +54,17 @@ public class SaveManager : Singleton<SaveManager>
     public static void Save(SaveData saveData)
     {
         string contentJson = JsonUtility.ToJson(saveData);
-        File.WriteAllText(GetSavePath(saveData.index),contentJson);
+        File.WriteAllText(GetSavePath(saveData.index), contentJson);
+        Instance.slots[saveData.index].SetSave(saveData);
     }
 
     public static bool HasSaves()
     {
-        foreach(SaveSlot slot in Instance.slots)
+        if (!Directory.Exists(Path)) return false;
+
+        foreach (SaveSlot slot in Instance.slots)
         {
-            if (slot != null && slot.HasData())
+            if (File.Exists(GetSavePath(slot.Index)))
             {
                 return true;
             }
@@ -71,7 +75,14 @@ public class SaveManager : Singleton<SaveManager>
 
     public static void NewGame()
     {
-        
+        if (PlayerPrefs.HasKey("LastPlayedSlot"))
+        {
+            Instance.slots[PlayerPrefs.GetInt("LastPlayedSlot")].LoadGame();
+        }
+        else
+        {
+
+        }
     }
 
     public static string GetSavePath(int indexSlot)

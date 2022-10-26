@@ -648,18 +648,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1906769569}
-        m_TargetAssemblyTypeName: SaveSlot, Assembly-CSharp
-        m_MethodName: DeleteSave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &613593890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,14 +1968,6 @@ MonoBehaviour:
   loadButton: {fileID: 1931549305}
   quitButton: {fileID: 44194206}
   slotRegion: {fileID: 666475118}
-  slotButton:
-  - {fileID: 1906769566}
-  - {fileID: 1667217166}
-  - {fileID: 1649753572}
-  deleteSlotButton:
-  - {fileID: 613593889}
-  - {fileID: 2137406240}
-  - {fileID: 986526280}
   backButton: {fileID: 1569125189}
 --- !u!82 &1397478806
 AudioSource:
@@ -2464,18 +2444,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1649753575}
-        m_TargetAssemblyTypeName: SaveSlot, Assembly-CSharp
-        m_MethodName: LoadGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1649753573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,7 +2494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33be97a256430c449514c7491c9b31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadButton: {fileID: 1667217166}
+  loadButton: {fileID: 1649753572}
   deleteButton: {fileID: 986526280}
   emptySaveSprite:
   - {fileID: 1970096131925664716, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
@@ -2634,18 +2602,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1397478806}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1667217169}
-        m_TargetAssemblyTypeName: SaveSlot, Assembly-CSharp
-        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -120,26 +120,25 @@ public class MapCharacter : MonoBehaviour
         List<Collider2D> results = new List<Collider2D>();
         if (Physics2D.OverlapCollider(collider, filter, results) > 0) // COLLIDED
         {
+            GameObject collidedObj = results[0].gameObject;
             collider.offset = Vector2.zero;
             isMoving = false;
-            switch (LayerMask.LayerToName(results[0].gameObject.layer))
+            switch (LayerMask.LayerToName(collidedObj.layer))
             {
-                #region Walls
-                case "Walls":
-                case "Default":
+                case "Walls": yield break;
+                case "Default": yield break;
 
-                    yield break;
+                case "Pot": InteractWithPot(collidedObj); yield break;
+                case "Stairs": yield break;
+                case "Sign": yield break;
+                case "Equipment": yield break;
 
-                #endregion
 
-                #region Water
                 case "Water": // À PRÉVOIR LE BOAT
-
                     yield break;
-                    #endregion
             }
 
-            Debug.Log(LayerMask.LayerToName(results[0].gameObject.layer));
+            Debug.Log(LayerMask.LayerToName(collidedObj.layer));
         }
 
         collider.offset = Vector2.zero;
@@ -177,5 +176,10 @@ public class MapCharacter : MonoBehaviour
         #endregion
 
         isMoving = false;
+    }
+
+    private void InteractWithPot(GameObject pot)
+    {
+        Destroy(pot);
     }
 }

@@ -37,12 +37,13 @@ public class GameManager : Singleton<GameManager>
         SaveManager.Save(saveData);
 
         characterMapPosition = saveData.playerPosition;
-        
-        //Start Game
     }
+
 
     public void LoadGame(SaveData saveData)
     {
+        PlayerPrefs.SetInt("LastPlayedSlot", saveData.index);
+
         characterMapPosition = saveData.playerPosition;
         if (!SceneManager.IsSceneLoaded("Map"))
             SceneManager.ChangeScene("Map");
