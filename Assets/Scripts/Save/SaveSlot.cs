@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class SaveSlot : MonoBehaviour
 {
-    [SerializeField] private Button loadButton;
-    [SerializeField] private Button deleteButton;
     [SerializeField] private Sprite[] emptySaveSprite;
     [SerializeField] private Sprite[] defaultSaveSprite;
 
@@ -18,85 +16,50 @@ public class SaveSlot : MonoBehaviour
 
     private void Start()
     {
-        RefreshSlot();
+        
     }
 
     public void SetSave(SaveData saveData)
     {
         this.saveData = saveData;
         index = saveData.index;
-
-        deleteButton.interactable = true;
-        deleteButton.onClick.RemoveAllListeners();
-        deleteButton.onClick.AddListener(DeleteSave);
-
-        loadButton.onClick.RemoveAllListeners();
-        loadButton.onClick.AddListener(LoadGame);
     }
 
-    public void SetEmpty(int slotIndex)
+    public SaveData GetSave()
     {
-        index = slotIndex;
-
-        deleteButton.interactable = false;
-        deleteButton.onClick.RemoveAllListeners();
-        deleteButton.onClick.AddListener(DeleteSave);
-
-        loadButton.onClick.RemoveAllListeners();
-        loadButton.onClick.AddListener(CreateNewGame);
+        return saveData;
     }
 
-    public void DeleteSave()
+    public void Load()
     {
-        SaveManager.DeleteSave(index);
-        saveData = new SaveData();
-        RefreshSlot();
+        GameManager.Instance.Load(saveData);
     }
 
-    public void LoadGame()
+    public void Delete()
     {
-        if (HasData())
+        index = default;
+        saveData = default;
+    }
+
+    public void RefreshLook()
+    {
+        Image defaultImg = GetComponent<Image>();
+        Button btn = GetComponent<Button>();
+        SpriteState spriteState = btn.spriteState;
+
+        if (saveData != default) // empty
         {
-            GameManager.Instance.LoadGame(saveData);
+            defaultImg.sprite = emptySaveSprite[0];
+            
+            spriteState.pressedSprite = emptySaveSprite[1];
+            btn.spriteState = spriteState;
         }
         else
         {
-            GameManager.Instance.NewGame(index);
+            defaultImg.sprite = defaultSaveSprite[0];
+
+            spriteState.pressedSprite = defaultSaveSprite[1];
+            btn.spriteState = spriteState;
         }
-        RefreshSlot();
-    }
-
-    public bool HasData()
-    {
-        return saveData != null;
-    }
-
-    public void CreateNewGame()
-    {
-        GameManager.Instance.NewGame(index);
-        RefreshSlot();
-    }
-
-    public void RefreshSlot()
-    {
-        Image thisImg = GetComponent<Image>();
-        Button thisBtn = GetComponent<Button>();
-
-        SpriteState tempState = thisBtn.spriteState;
-        thisBtn.transition = Selectable.Transition.SpriteSwap;
-
-        SaveData defaultData = new SaveData();
-
-        if (saveData == null || saveData == defaultData)
-        {
-            thisImg.sprite = emptySaveSprite[0];
-            tempState.pressedSprite = emptySaveSprite[1];
-        }
-        else
-        {
-            thisImg.sprite = defaultSaveSprite[0];
-            tempState.pressedSprite = defaultSaveSprite[1];
-        }
-        thisBtn.spriteState = tempState;
     }
 }

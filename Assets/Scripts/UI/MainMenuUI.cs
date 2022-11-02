@@ -25,34 +25,49 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        // TEMP
-        print(SaveManager.HasSaves());
-        if (!SaveManager.HasSaves())
+        if (!PlayerPrefs.HasKey("LastSlotPlayed"))
         {
-            OnLoadButtonClicked();
+            SaveManager.Instance.SetNewSaveAtSlot(0);
+            SaveManager.Instance.LoadSlot(0);
         }
         else
         {
-            GameManager.Instance.LoadGame(
-                SaveManager.Load(PlayerPrefs.GetInt("LastPlayedSlot"))
-                );
+            SaveManager.Instance.LoadSlot(PlayerPrefs.GetInt("LastSlotPlayed"));
         }
     }
-
+    public void OnLoadButtonClicked(Dictionary<string, object> _)
+    {
+        OnLoadButtonClicked();
+    }
     public void OnLoadButtonClicked()
     {
         playButton.gameObject.SetActive(false);
         loadButton.gameObject.SetActive(false);
 
         slotRegion.SetActive(true);
+
+        RefreshSlotsSprites();
     }
 
-    public void OnLoadButtonClicked(Dictionary<string, object> _)
+    public void OnSlotClicked(int index)
     {
-        playButton.gameObject.SetActive(false);
-        loadButton.gameObject.SetActive(false);
+        if (SaveManager.Instance.IsSlotEmpty(index))
+        {
+            SaveManager.Instance.SetNewSaveAtSlot(index);
+            RefreshSlotsSprites();
+        }
+        else
+        {
+            SaveManager.Instance.LoadSlot(index);
+        }
+    }
 
-        slotRegion.SetActive(true);
+    public void OnDeleteSlotClicked(int index)
+    {
+        if (!SaveManager.Instance.IsSlotEmpty(index))
+        {
+            SaveManager.Instance.DeleteSlot(index);
+        }
     }
 
     public void OnQuitButtonClicked()
@@ -72,5 +87,8 @@ public class MainMenuUI : MonoBehaviour
         slotRegion.SetActive(false);
     }
 
-    
+    private void RefreshSlotsSprites()
+    {
+        SaveManager.Instance.RefreshAll();
+    }
 }

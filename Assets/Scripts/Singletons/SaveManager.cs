@@ -9,12 +9,59 @@ public class SaveManager : Singleton<SaveManager>
 
     [SerializeField] private List<SaveSlot> slots = new List<SaveSlot>();
 
-    public void Start()
+    private void Start()
     {
-        GetSaves();
+        //GetSaves();
     }
 
-    public void GetSaves()
+    public void SetNewSaveAtSlot(int index)
+    {
+        Instance.slots[index].SetSave(new SaveData());
+
+        SaveFile(index);
+    }
+
+    private void SaveFile(int index)
+    {
+        if (!Directory.Exists(Path))
+            Directory.CreateDirectory(Path);
+
+        SaveData data = Instance.slots[index].GetSave();
+        string contentJson = JsonUtility.ToJson(data);
+        File.WriteAllText(GetSavePath(data.index), contentJson);
+    }
+
+    public void LoadSlot(int index)
+    {
+        Instance.slots[index].Load();
+        SceneManager.ChangeScene("Map");
+    }
+
+    public bool IsSlotEmpty(int index)
+    {
+        if (Instance.slots[index] == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void DeleteSlot(int index)
+    {
+        Instance.slots[index].Delete();
+    }
+
+    public void RefreshAll()
+    {
+        foreach (SaveSlot slot in Instance.slots)
+        {
+            slot.RefreshLook();
+        }
+    }
+
+
+    /*public void GetSaves()
     {
         if (!Directory.Exists(Path))
             Directory.CreateDirectory(Path);
@@ -34,31 +81,31 @@ public class SaveManager : Singleton<SaveManager>
                 slots[i].SetEmpty(i);
             }
         }
-    }
+    }*/
 
-    public static void DeleteSave(int index)
+    /*public static void DeleteSave(int index)
     {
         if (File.Exists(GetSavePath(index)))
         {
             File.Delete(GetSavePath(index));
             Instance.slots[index].DeleteSave();
         }
-    }
+    }*/
 
-    public static SaveData Load(int index)
+    /*public static SaveData Load(int index)
     {
         string fileContent = File.ReadAllText(GetSavePath(index));
         return JsonUtility.FromJson<SaveData>(fileContent);
-    }
+    }*/
 
-    public static void Save(SaveData saveData)
+    /*public static void Save(SaveData saveData)
     {
         string contentJson = JsonUtility.ToJson(saveData);
         File.WriteAllText(GetSavePath(saveData.index), contentJson);
         Instance.slots[saveData.index].SetSave(saveData);
-    }
+    }*/
 
-    public static bool HasSaves()
+    /*public static bool HasSaves()
     {
         if (!Directory.Exists(Path)) return false;
 
@@ -71,19 +118,15 @@ public class SaveManager : Singleton<SaveManager>
         }
 
         return false;
-    }
+    }*/
 
-    public static void NewGame()
+    /*public static void NewGame()
     {
         if (PlayerPrefs.HasKey("LastPlayedSlot"))
         {
             Instance.slots[PlayerPrefs.GetInt("LastPlayedSlot")].LoadGame();
         }
-        else
-        {
-
-        }
-    }
+    }*/
 
     public static string GetSavePath(int indexSlot)
     {

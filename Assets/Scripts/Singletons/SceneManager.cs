@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneManager : Singleton<SceneManager>
 {
     private AsyncOperation asyncScene;
+    private string loadedSceneName;
     void Start()
     {
         EventManager.StartListening("FadeOutComplete", LoadPreparedScene);
@@ -13,6 +14,7 @@ public class SceneManager : Singleton<SceneManager>
 
     private void PrepareScene(string sceneName)
     {
+        loadedSceneName = sceneName;
         asyncScene = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
         asyncScene.allowSceneActivation = false;
     }
@@ -37,6 +39,21 @@ public class SceneManager : Singleton<SceneManager>
     private void LoadPreparedScene(Dictionary<string, object> _)
     {
         asyncScene.allowSceneActivation = true;
-        EventManager.TriggerEvent("UndoFade", new Dictionary<string, object>());
+
+        WaitForSceneLoaded();
+    }
+
+    private IEnumerator WaitForSceneLoaded()
+    {
+        while (!asyncScene.isDone)
+        {
+            yield return null;
+        }
+
+        EventManager.TriggerEvent("On" + loadedSceneName + "SceneLoaded", null);
+        EventManager.TriggerEvent("UndoFade", null);
+
+        asyncScene = null;
+        loadedSceneName = null;
     }
 }

@@ -16,11 +16,9 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button quitToDesktopButton;
 
     [SerializeField] private GameObject pauseSection;
-    [SerializeField] private GameObject saveSlotSection;
 
     public void TogglePauseMenu()
     {
-        saveSlotSection.SetActive(false);
         saveButton.gameObject.SetActive(true);
         pauseSection.SetActive(!pauseSection.activeInHierarchy);
     }
@@ -28,7 +26,6 @@ public class PauseUI : MonoBehaviour
     public void ToggleSaveMenu()
     {
         saveButton.gameObject.SetActive(!saveButton.gameObject.activeInHierarchy);
-        saveSlotSection.SetActive(!saveSlotSection.activeInHierarchy);
     }
 
     public void QuitToMenu()
@@ -47,8 +44,12 @@ public class PauseUI : MonoBehaviour
 
     public void LoadSave()
     {
-        GameManager.Instance.LoadGame(
-            SaveManager.Load(PlayerPrefs.GetInt("LastPlayedSlot"))
-        );
+
+    }
+
+    public void QuickSave()
+    {
+        
+
     }
 }

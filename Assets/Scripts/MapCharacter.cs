@@ -24,8 +24,6 @@ public class MapCharacter : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("LOADED POS: " + GameManager.characterMapPosition);
-        transform.localPosition = GameManager.characterMapPosition;
     }
 
     private void OnEnable()
@@ -40,8 +38,8 @@ public class MapCharacter : MonoBehaviour
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("LOADED POS: " + GameManager.characterMapPosition);
-        transform.localPosition = GameManager.characterMapPosition;
+        //Debug.Log("LOADED POS: " + GameManager.characterMapPosition);
+        //transform.localPosition = GameManager.characterMapPosition;
     }
 
     void Update()
