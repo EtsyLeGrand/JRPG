@@ -16,13 +16,13 @@ public class SaveSlot : MonoBehaviour
 
     private void Start()
     {
-        
+        RefreshLook();
     }
 
     public void SetSave(SaveData saveData)
     {
         this.saveData = saveData;
-        index = saveData.index;
+        index = saveData?.index??0;
     }
 
     public SaveData GetSave()
@@ -47,7 +47,7 @@ public class SaveSlot : MonoBehaviour
         Button btn = GetComponent<Button>();
         SpriteState spriteState = btn.spriteState;
 
-        if (saveData != default) // empty
+        if (saveData == null) // empty
         {
             defaultImg.sprite = emptySaveSprite[0];
             

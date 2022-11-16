@@ -12,10 +12,9 @@ public class CharacterInstance
         public int hp;
 
         public float strength;
-        public float mana;
         public float constitution;
-        public float speed;
-        public float intelligence;
+        public float mana;
+        public float initiative;
         public float luck;
     }
 
@@ -33,8 +32,7 @@ public class CharacterInstance
             strength = character.rpgClass.GetStrength(1),
             mana = character.rpgClass.GetMana(1),
             constitution = character.rpgClass.GetConstitution(1),
-            speed = character.rpgClass.GetSpeed(1),
-            intelligence = character.rpgClass.GetIntelligence(1),
+            initiative = character.rpgClass.GetInitiative(1),
             luck = character.rpgClass.GetLuck(1),
         };
 

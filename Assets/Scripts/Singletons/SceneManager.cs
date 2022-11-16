@@ -40,7 +40,7 @@ public class SceneManager : Singleton<SceneManager>
     {
         asyncScene.allowSceneActivation = true;
 
-        WaitForSceneLoaded();
+        StartCoroutine(WaitForSceneLoaded());
     }
 
     private IEnumerator WaitForSceneLoaded()

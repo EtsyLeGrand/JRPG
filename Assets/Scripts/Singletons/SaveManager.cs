@@ -9,14 +9,24 @@ public class SaveManager : Singleton<SaveManager>
 
     [SerializeField] private List<SaveSlot> slots = new List<SaveSlot>();
 
+    public override void Awake()
+    {
+        base.Awake();
+        GetSaves();
+    }
+
     private void Start()
     {
         //GetSaves();
+        //Debug.Log($"{Application.persistentDataPath}/Save/");
     }
 
     public void SetNewSaveAtSlot(int index)
     {
-        Instance.slots[index].SetSave(new SaveData());
+        Instance.slots[index].SetSave(new SaveData() {
+            index = index,
+            playerPosition = GameManager.Instance.DefaultCharacterMapPosition
+        });
 
         SaveFile(index);
     }
@@ -28,7 +38,7 @@ public class SaveManager : Singleton<SaveManager>
 
         SaveData data = Instance.slots[index].GetSave();
         string contentJson = JsonUtility.ToJson(data);
-        File.WriteAllText(GetSavePath(data.index), contentJson);
+        File.WriteAllText(GetSavePath(index), contentJson);
     }
 
     public void LoadSlot(int index)
@@ -39,7 +49,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public bool IsSlotEmpty(int index)
     {
-        if (Instance.slots[index] == null)
+        if (Instance.slots[index].GetSave() == null)
         {
             return true;
         }
@@ -61,7 +71,7 @@ public class SaveManager : Singleton<SaveManager>
     }
 
 
-    /*public void GetSaves()
+    public void GetSaves()
     {
         if (!Directory.Exists(Path))
             Directory.CreateDirectory(Path);
@@ -78,19 +88,19 @@ public class SaveManager : Singleton<SaveManager>
             }
             else
             {
-                slots[i].SetEmpty(i);
+                slots[i].SetSave(null);
             }
         }
-    }*/
+    }
 
-    /*public static void DeleteSave(int index)
+    public static void DeleteSave(int index)
     {
         if (File.Exists(GetSavePath(index)))
         {
             File.Delete(GetSavePath(index));
-            Instance.slots[index].DeleteSave();
+            Instance.slots[index].Delete();
         }
-    }*/
+    }
 
     /*public static SaveData Load(int index)
     {

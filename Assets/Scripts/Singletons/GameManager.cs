@@ -11,9 +11,12 @@ public class GameManager : Singleton<GameManager>
 
     private SaveData importedData;
 
+    public Vector2 DefaultCharacterMapPosition { get => defaultCharacterMapPosition; }
+
     private void Start()
     {
         EventManager.StartListening("OnMapSceneLoaded", OnMapSceneLoaded);
+        EventManager.StartListening("OnFightSceneLoaded", OnFightSceneLoaded);
     }
 
     private void OnMapSceneLoaded(Dictionary<string, object> _)
@@ -22,13 +25,19 @@ public class GameManager : Singleton<GameManager>
         character = FindObjectOfType<MapCharacter>().gameObject;
         if (importedData != null)
         {
-            character.transform.position = importedData.playerPosition;
+            character.transform.localPosition = importedData.playerPosition;
         }
         else
         {
             character.transform.position = defaultCharacterMapPosition;
         }
     }
+
+    private void OnFightSceneLoaded(Dictionary<string, object> _)
+    {
+        
+    }
+
 
     public void CreateParty()
     {

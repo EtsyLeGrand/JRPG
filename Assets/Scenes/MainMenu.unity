@@ -1838,7 +1838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047eee0ad728de649a129afd5c5b0a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 0
+  dontDestroy: 1
   slots:
   - {fileID: 1906769569}
   - {fileID: 1667217169}
@@ -2331,7 +2331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroy: 1
   party: []
-  startingParty: []
+  startingParty:
+  - {fileID: 11400000, guid: 3a3441114621a96428f5fa2554c42f2a, type: 2}
+  - {fileID: 0}
   defaultCharacterMapPosition: {x: 12.5, y: -9.5}
 --- !u!4 &1572818799
 Transform:

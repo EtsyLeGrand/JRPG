@@ -82,7 +82,6 @@ public class MapCharacter : MonoBehaviour
         {
             StartCoroutine(movementQueue.Peek());
             movementQueue.Dequeue();
-
         }
 
     }
@@ -113,8 +112,11 @@ public class MapCharacter : MonoBehaviour
             collider.offset = -collider.offset;
         }
 
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = ~LayerMask.NameToLayer("Bounds");
+        ContactFilter2D filter = new ContactFilter2D
+        {
+            layerMask = ~LayerMask.NameToLayer("Bounds")
+        };
+
         List<Collider2D> results = new List<Collider2D>();
         if (Physics2D.OverlapCollider(collider, filter, results) > 0) // COLLIDED
         {

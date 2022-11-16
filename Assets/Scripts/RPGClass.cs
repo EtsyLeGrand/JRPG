@@ -9,10 +9,9 @@ public class RPGClass : ScriptableObject
     public struct Stats
     {
         public AnimationCurve strength;
-        public AnimationCurve mana;
         public AnimationCurve constitution;
-        public AnimationCurve speed;
-        public AnimationCurve intelligence;
+        public AnimationCurve mana;
+        public AnimationCurve initiative;
         public AnimationCurve luck;
     }
 
@@ -38,13 +37,9 @@ public class RPGClass : ScriptableObject
     {
         return stats.constitution.Evaluate(level);
     }
-    public float GetSpeed(int level)
+    public float GetInitiative(int level)
     {
-        return stats.speed.Evaluate(level);
-    }
-    public float GetIntelligence(int level)
-    {
-        return stats.intelligence.Evaluate(level);
+        return stats.initiative.Evaluate(level);
     }
     public float GetLuck(int level)
     {
