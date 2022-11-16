@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
 
     private SaveData importedData;
 
+    private List<EnemyCharacter> possibleEnemies = new List<EnemyCharacter>();
+
     public Vector2 DefaultCharacterMapPosition { get => defaultCharacterMapPosition; }
 
     private void Start()
@@ -35,7 +37,14 @@ public class GameManager : Singleton<GameManager>
 
     private void OnFightSceneLoaded(Dictionary<string, object> _)
     {
-        
+        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
+
+        for (int i = 0; i <= 2; i++) // 2 ennemis
+        {
+            enemies.Add(possibleEnemies[Random.Range(0, possibleEnemies.Count)]);
+        }
+
+        FightManager.Instance.SetFightData(enemies);
     }
 
 
