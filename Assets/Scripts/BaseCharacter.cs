@@ -8,4 +8,5 @@ public abstract class BaseCharacter : ScriptableObject
     public RPGClass rpgClass;
     public RuntimeAnimatorController animatorController;
     public Sprite sprite;
+    public Vector3 spriteScale;
 }

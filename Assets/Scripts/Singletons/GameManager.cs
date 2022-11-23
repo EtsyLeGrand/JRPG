@@ -18,7 +18,6 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         EventManager.StartListening("OnMapSceneLoaded", OnMapSceneLoaded);
-        EventManager.StartListening("OnFightSceneLoaded", OnFightSceneLoaded);
     }
 
     private void OnMapSceneLoaded(Dictionary<string, object> _)
@@ -34,19 +33,6 @@ public class GameManager : Singleton<GameManager>
             character.transform.position = defaultCharacterMapPosition;
         }
     }
-
-    private void OnFightSceneLoaded(Dictionary<string, object> _)
-    {
-        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
-
-        for (int i = 0; i <= 2; i++) // 2 ennemis
-        {
-            enemies.Add(possibleEnemies[Random.Range(0, possibleEnemies.Count)]);
-        }
-
-        FightManager.Instance.SetFightData(enemies);
-    }
-
 
     public void CreateParty()
     {

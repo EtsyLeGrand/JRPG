@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86d9a5a60789c5d4dabc764fa78a3b28, type: 3}
-  m_Name: Bat
+  m_Name: Owl Knight
   m_EditorClassIdentifier: 
-  rpgClass: {fileID: 11400000, guid: 9e21154d33e7c7c4a8abbbcec0d0ddea, type: 2}
+  rpgClass: {fileID: 11400000, guid: 50882918451ebf84ea0262c40bd02c3b, type: 2}
   animatorController: {fileID: 0}
-  sprite: {fileID: 21300000, guid: e44ed4ca7a6057946a167957b8ae5f94, type: 3}
-  spriteScale: {x: -8, y: 8, z: 0}
+  sprite: {fileID: 21300000, guid: eb8274de7c5b7784ab3c56cf13aa78d2, type: 3}
+  spriteScale: {x: -7.5, y: 7.5, z: 0}
   levelRange: {x: 1, y: 1}
   speed: 0
   xpLoot:
