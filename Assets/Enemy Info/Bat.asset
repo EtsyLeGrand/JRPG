@@ -16,8 +16,10 @@ MonoBehaviour:
   animatorController: {fileID: 0}
   sprite: {fileID: 21300000, guid: e44ed4ca7a6057946a167957b8ae5f94, type: 3}
   spriteScale: {x: -8, y: 8, z: 0}
+  fightColliderOffset: {x: 0, y: 0}
+  fightColliderSize: {x: 0, y: 0}
   levelRange: {x: 1, y: 1}
-  speed: 0
+  speed: 5
   xpLoot:
     serializedVersion: 2
     m_Curve: []

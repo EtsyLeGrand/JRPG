@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c5a8d174474e684c8774ae9b3b4d011, type: 3}
-  m_Name: Bat (Class)
+  m_Name: c_Mage
   m_EditorClassIdentifier: 
-  className: 
+  className: Mage
   stats:
     strength:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0.44444445
-        outSlope: 0.44444445
+        time: 0
+        value: 0
+        inSlope: 0.49999428
+        outSlope: 0.49999428
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
-        value: 5
-        inSlope: 0.44444445
-        outSlope: 0.44444445
+        time: 1
+        value: 0.49999428
+        inSlope: 0.49999428
+        outSlope: 0.49999428
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -43,18 +43,18 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 1.5555556
-        outSlope: 1.5555556
+        value: 70
+        inSlope: 7.5
+        outSlope: 7.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 10
-        value: 15
-        inSlope: 1.5555556
-        outSlope: 1.5555556
+        time: 25
+        value: 250
+        inSlope: 7.5
+        outSlope: 7.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -67,19 +67,19 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 34
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        time: 3
+        value: 4
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -91,9 +91,9 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
@@ -115,9 +115,9 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
@@ -125,8 +125,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
@@ -136,4 +136,8 @@ MonoBehaviour:
       m_RotationOrder: 4
   SkillUnlocks:
   - level: 1
-    skill: {fileID: 11400000, guid: bf40f7a1e8cd85846bf98546ecf9da49, type: 2}
+    skill: {fileID: 11400000, guid: c39111fdbed69784292870836aa6f83a, type: 2}
+  - level: 1
+    skill: {fileID: 11400000, guid: 4afe941609155b049abcd621c1e681f2, type: 2}
+  - level: 2
+    skill: {fileID: 11400000, guid: 35fc0ed42dd5ddd4bac4579d6ba3f110, type: 2}

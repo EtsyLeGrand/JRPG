@@ -22,6 +22,7 @@ public class RPGClass : ScriptableObject
         public Skill skill;
     }
 
+    public string className;
     public Stats stats;
     public List<SkillUnlock> SkillUnlocks;
 

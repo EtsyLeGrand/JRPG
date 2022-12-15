@@ -2333,7 +2333,7 @@ MonoBehaviour:
   party: []
   startingParty:
   - {fileID: 11400000, guid: 3a3441114621a96428f5fa2554c42f2a, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: d030d28a3d9bac341bee99b2f44da21b, type: 2}
   defaultCharacterMapPosition: {x: 12.5, y: -9.5}
 --- !u!4 &1572818799
 Transform:

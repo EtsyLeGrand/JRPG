@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6f396e4d80b9054bb11f62e8021d1f9, type: 3}
-  m_Name: p_Hero
+  m_Name: p_LoserDude
   m_EditorClassIdentifier: 
-  rpgClass: {fileID: 11400000, guid: a16b570f562a505438bfc7434b047528, type: 2}
-  animatorController: {fileID: 9100000, guid: 59d707c178b5eb74c9f79b66749b44a1, type: 2}
-  sprite: {fileID: 3427114271967980436, guid: d3b05374a7d01e3468f4839964b89150, type: 3}
+  rpgClass: {fileID: 11400000, guid: 1ee1825d9ed360c409df99c977856a64, type: 2}
+  animatorController: {fileID: 9100000, guid: b1217a628c0e53846bc76f576df212ea, type: 2}
+  sprite: {fileID: -7509266151024185575, guid: 5b5921a1693bbff43a0271355344843f, type: 3}
   spriteScale: {x: 0, y: 0, z: 0}
-  fightColliderOffset: {x: -0.25, y: -2.3}
-  fightColliderSize: {x: 2.58, y: 4.81}
+  fightColliderOffset: {x: 0, y: 0}
+  fightColliderSize: {x: 2.14, y: 4.97}
   xpNeededByLevel:
     serializedVersion: 2
     m_Curve:

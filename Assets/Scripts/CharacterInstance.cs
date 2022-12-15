@@ -11,11 +11,11 @@ public class CharacterInstance
         public int level;
         public int hp;
 
-        public float strength;
-        public float constitution;
-        public float mana;
-        public float initiative;
-        public float luck;
+        public int strength;
+        public int constitution;
+        public int mana;
+        public int initiative;
+        public int luck;
     }
 
     public BaseCharacter character;
@@ -29,14 +29,14 @@ public class CharacterInstance
         {
             level = 1,
 
-            strength = character.rpgClass.GetStrength(1),
-            mana = character.rpgClass.GetMana(1),
-            constitution = character.rpgClass.GetConstitution(1),
-            initiative = character.rpgClass.GetInitiative(1),
-            luck = character.rpgClass.GetLuck(1),
+            strength = (int)character.rpgClass.GetStrength(1),
+            mana = (int)character.rpgClass.GetMana(1),
+            constitution = (int)character.rpgClass.GetConstitution(1),
+            initiative = (int)character.rpgClass.GetInitiative(1),
+            luck = (int)character.rpgClass.GetLuck(1),
         };
 
-        currentStats.hp = (int)currentStats.constitution; // À CHANGER
+        currentStats.hp = currentStats.constitution; // À CHANGER
     }
 
     public void Heal(int hp)
