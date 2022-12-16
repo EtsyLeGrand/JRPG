@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class FightActor : MonoBehaviour
 {
-    public FightInfoCanvas fightInfoCanvas;
-    public int initiative;
-    public int fighterIndex;
+    public enum ActorTeam
+    {
+        Hero,
+        Enemy
+    }
 
+    public FightInfoCanvas fightInfoCanvas;
+    public int id;
+    public int initiative;
+    public ActorTeam team;
+    
 
     private void OnMouseOver()
     {
-        fightInfoCanvas.SetDisplayInfo(fighterIndex);
+        fightInfoCanvas.SetDisplayInfo(id);
+    }
+
+    private void OnMouseUp()
+    {
+        if (FightManager.Instance.canTarget)
+        {
+            FightManager.Instance.SetAttackTarget(id);
+        }
     }
 }

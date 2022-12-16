@@ -165,12 +165,13 @@ public class MapCharacter : MonoBehaviour
         {
             //Encounter
             haltQueue = true;
-            Dictionary<string, object> args = new Dictionary<string, object>()
-            {
-                {"x", transform.localPosition.x},
-                {"y", transform.localPosition.y}
-            };
-            EventManager.TriggerEvent("RegisterNewMapPosition", args);
+            //Dictionary<string, object> args = new Dictionary<string, object>()
+            //{
+            //    {"x", transform.localPosition.x},
+            //    {"y", transform.localPosition.y}
+            //};
+            //EventManager.TriggerEvent("RegisterNewMapPosition", args);
+            GameManager.Instance.lastSavedPosition = new Vector2(transform.localPosition.x, transform.localPosition.y);
             SceneManager.ChangeScene("Fight", 1, 1);
         }
         #endregion

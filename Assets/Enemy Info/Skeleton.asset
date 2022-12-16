@@ -9,20 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d9a5a60789c5d4dabc764fa78a3b28, type: 3}
+  m_Script: {fileID: 11500000, guid: b4083474961973f4f9aa1d5d7291e101, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   rpgClass: {fileID: 11400000, guid: 7e9163cc2f7686d4dbaa79a282375c17, type: 2}
   animatorController: {fileID: 0}
   sprite: {fileID: 21300000, guid: b40d695bdb39a224682807b2a44d238d, type: 3}
-  spriteScale: {x: 10, y: 10, z: 0}
+  spriteScale: {x: 10, y: 10, z: 10}
   fightColliderOffset: {x: 0, y: 0}
-  fightColliderSize: {x: 0, y: 0}
-  levelRange: {x: 1, y: 1}
-  speed: 1
-  xpLoot:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  fightColliderSize: {x: 0.35, y: 0.4}

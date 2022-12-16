@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be7c360d9813e4e8c14fea62235b08, type: 3}
   m_Name: s_Heal
   m_EditorClassIdentifier: 
-  skillType: 0
-  skillPowerRange: {x: 0, y: 0}
-  manaCost: 0
-  target: 0
-  effect:
-    type: 0
-    setting:
-      tickType: 0
-      probability: 0
-      turnLength: 0
-      tickValueRange: {x: 0, y: 0}
-  vfx: {fileID: 0}
-  tickVfx: {fileID: 0}
-  sfx: {fileID: 0}
-  tickSfx: {fileID: 0}
+  skillName: Heal
+  skillPowerRange: {x: 6, y: 8}
+  manaCost: 3
+  target: 1
+  effect: 1
+  fx: {fileID: 2069842122763428829, guid: 537b58e1cf16563448ef7abc7673ffb1, type: 3}

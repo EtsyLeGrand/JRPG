@@ -22,6 +22,8 @@ public class RPGClass : ScriptableObject
         public Skill skill;
     }
 
+    public int xp;
+    public int xpDrop;
     public string className;
     public Stats stats;
     public List<SkillUnlock> SkillUnlocks;
@@ -46,5 +48,4 @@ public class RPGClass : ScriptableObject
     {
         return stats.luck.Evaluate(level);
     }
-
 }

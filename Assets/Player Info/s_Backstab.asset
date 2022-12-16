@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be7c360d9813e4e8c14fea62235b08, type: 3}
   m_Name: s_Backstab
   m_EditorClassIdentifier: 
-  skillType: 0
+  skillName: Backstab
   skillPowerRange: {x: 4, y: 7}
   manaCost: 0
   target: 1
-  effect:
-    type: 1
-    setting:
-      tickType: 0
-      probability: 0
-      turnLength: 0
-      tickValueRange: {x: 0, y: 0}
-  vfx: {fileID: 0}
-  tickVfx: {fileID: 0}
-  sfx: {fileID: 0}
-  tickSfx: {fileID: 0}
+  effect: 0
+  fx: {fileID: 2351622165070045828, guid: 5cf4d0394b940e1439d380071d4d2cff, type: 3}

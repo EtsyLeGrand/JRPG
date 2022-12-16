@@ -8,7 +8,7 @@ public class PlayerCharacter : BaseCharacter
 {
     public AnimationCurve xpNeededByLevel;
 
-    public float getXPNeededByLevel(int level)
+    public float GetXPNeededByLevel(int level)
     {
         return xpNeededByLevel.Evaluate(level);
     }

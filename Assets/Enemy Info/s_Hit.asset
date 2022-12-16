@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be7c360d9813e4e8c14fea62235b08, type: 3}
   m_Name: s_Hit
   m_EditorClassIdentifier: 
-  skillType: 0
+  skillName: Hit
   skillPowerRange: {x: 1, y: 2}
   manaCost: 0
   target: 1
-  effect:
-    type: 1
-    setting:
-      tickType: 0
-      probability: 0
-      turnLength: 0
-      tickValueRange: {x: 0, y: 0}
-  vfx: {fileID: 2069842122763428829, guid: cd48112e08c653a478fc08ca270038b0, type: 3}
-  tickVfx: {fileID: 0}
-  sfx: {fileID: 0}
-  tickSfx: {fileID: 0}
+  effect: 0
+  fx: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6f396e4d80b9054bb11f62e8021d1f9, type: 3}
-  m_Name: p_LoserDude
+  m_Name: p_Mage
   m_EditorClassIdentifier: 
   rpgClass: {fileID: 11400000, guid: 1ee1825d9ed360c409df99c977856a64, type: 2}
   animatorController: {fileID: 9100000, guid: b1217a628c0e53846bc76f576df212ea, type: 2}

@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be7c360d9813e4e8c14fea62235b08, type: 3}
   m_Name: s_Dash
   m_EditorClassIdentifier: 
-  skillType: 0
-  skillPowerRange: {x: 0, y: 0}
-  manaCost: 0
-  target: 0
-  effect:
-    type: 0
-    setting:
-      tickType: 0
-      probability: 0
-      turnLength: 0
-      tickValueRange: {x: 0, y: 0}
-  vfx: {fileID: 0}
-  tickVfx: {fileID: 0}
-  sfx: {fileID: 0}
-  tickSfx: {fileID: 0}
+  skillName: Dash
+  skillPowerRange: {x: 8, y: 9}
+  manaCost: 2
+  target: 1
+  effect: 0
+  fx: {fileID: 509123180651590155, guid: 521011e65bcf58144b2d43458611728f, type: 3}

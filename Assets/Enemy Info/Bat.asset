@@ -9,20 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d9a5a60789c5d4dabc764fa78a3b28, type: 3}
+  m_Script: {fileID: 11500000, guid: b4083474961973f4f9aa1d5d7291e101, type: 3}
   m_Name: Bat
   m_EditorClassIdentifier: 
   rpgClass: {fileID: 11400000, guid: 9e21154d33e7c7c4a8abbbcec0d0ddea, type: 2}
   animatorController: {fileID: 0}
   sprite: {fileID: 21300000, guid: e44ed4ca7a6057946a167957b8ae5f94, type: 3}
-  spriteScale: {x: -8, y: 8, z: 0}
-  fightColliderOffset: {x: 0, y: 0}
-  fightColliderSize: {x: 0, y: 0}
-  levelRange: {x: 1, y: 1}
-  speed: 5
-  xpLoot:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  spriteScale: {x: -8, y: 8, z: 8}
+  fightColliderOffset: {x: 0, y: 0.06}
+  fightColliderSize: {x: 0.2, y: 0.38}

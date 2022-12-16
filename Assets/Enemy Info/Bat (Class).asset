@@ -12,20 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5a8d174474e684c8774ae9b3b4d011, type: 3}
   m_Name: Bat (Class)
   m_EditorClassIdentifier: 
-  className: 
+  className: Bat
   stats:
     strength:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0.44444445
-        outSlope: 0.44444445
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
       - serializedVersion: 3
         time: 10
         value: 5
@@ -42,15 +33,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1.5555556
-        outSlope: 1.5555556
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 10
         value: 15
         inSlope: 1.5555556
@@ -66,17 +48,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 34
@@ -89,15 +62,6 @@ MonoBehaviour:
     initiative:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
@@ -114,17 +78,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
-        value: 1
+        value: 5
         inSlope: 0
         outSlope: 0
         tangentMode: 34

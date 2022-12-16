@@ -12,18 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be7c360d9813e4e8c14fea62235b08, type: 3}
   m_Name: s_FireBolt
   m_EditorClassIdentifier: 
-  skillType: 0
+  skillName: Fire Bolt
   skillPowerRange: {x: 5, y: 8}
   manaCost: 1
   target: 1
-  effect:
-    type: 1
-    setting:
-      tickType: 0
-      probability: 0
-      turnLength: 0
-      tickValueRange: {x: 0, y: 0}
-  vfx: {fileID: 0}
-  tickVfx: {fileID: 0}
-  sfx: {fileID: 0}
-  tickSfx: {fileID: 0}
+  effect: 0
+  fx: {fileID: 3912313219532025450, guid: 0951aaf671e568049942fa41254360d8, type: 3}

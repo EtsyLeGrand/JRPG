@@ -8,8 +8,8 @@ public class FightInfoCanvas : MonoBehaviour
     [SerializeField] private Text hoveredHpCount;
     [SerializeField] private Text hoveredManaCount;
     [SerializeField] private Text hoveredActorName;
-    
-
+    [SerializeField] public GameObject winSection;
+    [SerializeField] public GameObject loseSection;
 
     public void SetDisplayInfo(int index)
     {
@@ -17,5 +17,15 @@ public class FightInfoCanvas : MonoBehaviour
         hoveredHpCount.text = "HP: " + inst.currentStats.hp;
         hoveredManaCount.text = "Mana: " + inst.currentStats.mana;
         hoveredActorName.text = inst.character.rpgClass.className;
+    }
+
+    public void OnBackToMenuClicked()
+    {
+        FightManager.Instance.BackToMenu();
+    }
+
+    public void OnBackToMapClicked()
+    {
+        FightManager.Instance.BackToMap();
     }
 }

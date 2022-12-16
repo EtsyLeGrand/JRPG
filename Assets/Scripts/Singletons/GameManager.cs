@@ -8,10 +8,12 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject character;
     [SerializeField] private Vector2 defaultCharacterMapPosition;
+    public Vector2 lastSavedPosition = Vector2.zero;
 
+    public bool isDifficultyOverridden = false;
     private SaveData importedData;
 
-    private List<EnemyCharacter> possibleEnemies = new List<EnemyCharacter>();
+    //private List<EnemyCharacter> possibleEnemies = new List<EnemyCharacter>();
 
     public Vector2 DefaultCharacterMapPosition { get => defaultCharacterMapPosition; }
 
@@ -22,7 +24,11 @@ public class GameManager : Singleton<GameManager>
 
     private void OnMapSceneLoaded(Dictionary<string, object> _)
     {
-        CreateParty();
+        if (party.Count == 0)
+        {
+            CreateParty();
+        }
+        
         character = FindObjectOfType<MapCharacter>().gameObject;
         if (importedData != null)
         {
@@ -31,6 +37,11 @@ public class GameManager : Singleton<GameManager>
         else
         {
             character.transform.position = defaultCharacterMapPosition;
+        }
+
+        if (lastSavedPosition != Vector2.zero)
+        {
+            character.transform.localPosition = lastSavedPosition;
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class CharacterInstance
@@ -9,6 +10,8 @@ public class CharacterInstance
     public struct CurrentStats
     {
         public int level;
+        public int xp;
+        public int xpDrop;
         public int hp;
 
         public int strength;
@@ -28,6 +31,8 @@ public class CharacterInstance
         currentStats = new CurrentStats()
         {
             level = 1,
+            xp = 0,
+            xpDrop = character.rpgClass.xpDrop,
 
             strength = (int)character.rpgClass.GetStrength(1),
             mana = (int)character.rpgClass.GetMana(1),
@@ -36,16 +41,12 @@ public class CharacterInstance
             luck = (int)character.rpgClass.GetLuck(1),
         };
 
-        currentStats.hp = currentStats.constitution; // À CHANGER
+        currentStats.hp = currentStats.constitution;
     }
 
-    public void Heal(int hp)
+    public List<Skill> GetSkills()
     {
-        currentStats.hp += hp;
-    }
-
-    public void Damage(int hp)
-    {
-        currentStats.hp -= hp;
+        // Fier de ça pareil
+        return Skills.Where(x => x.level <= currentStats.level).ToList().Select(o => o.skill).ToList();
     }
 }
