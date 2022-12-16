@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5a8d174474e684c8774ae9b3b4d011, type: 3}
   m_Name: Bat (Class)
   m_EditorClassIdentifier: 
+  xp: 0
+  xpDrop: 1
   className: Bat
   stats:
     strength:

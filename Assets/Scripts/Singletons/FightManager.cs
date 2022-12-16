@@ -34,6 +34,9 @@ public class FightManager : Singleton<FightManager>
     [SerializeField] private FightInfoCanvas infoCanvas;
     [SerializeField] private PlayerFightUI playerUI;
 
+    [SerializeField] private AudioSource winSfx;
+    [SerializeField] private AudioSource loseSfx;
+
     private CharacterInstance target = null;
     public bool canTarget = false;
 
@@ -73,15 +76,14 @@ public class FightManager : Singleton<FightManager>
     private void GenerateEnemies()
     {
         int currentFightEnemyCount = Random.Range(1, MAX_ENEMIES_PER_FIGHT + 1);
+        List<EnemyDifficulty> possibleEnemiesInCurrentFight = possibleEnemies.Where(x => x.difficulty <= difficulty).ToList();
         if (difficulty == 4)
         {
             currentFightEnemyCount = 1;
+            possibleEnemiesInCurrentFight = possibleEnemies.Where(x => x.difficulty == difficulty).ToList();
         }
 
         Debug.Log("Enemies in fight: " + currentFightEnemyCount);
-
-        List<EnemyDifficulty> possibleEnemiesInCurrentFight = possibleEnemies.Where(x => x.difficulty <= difficulty).ToList();
-
         for (int i = 0; i < currentFightEnemyCount; i++)
         {
             EnemyCharacter enemyCharacter = possibleEnemiesInCurrentFight[Random.Range(0, possibleEnemiesInCurrentFight.Count)].enemyCharacter;
@@ -196,20 +198,29 @@ public class FightManager : Singleton<FightManager>
 
         if (IsEveryEnemyDead())
         {
-            infoCanvas.winSection.SetActive(true);
-            foreach(CharacterInstance character in partyData)
+            if (difficulty == 4)
             {
-                character.currentStats.xp += fighters.Where(x => x.actor.team == FightActor.ActorTeam.Enemy).ToList().Select(x => x.instance.character.rpgClass.xpDrop).ToList().Sum();
-                PlayerCharacter player = (PlayerCharacter)character.character;
-                if (character.currentStats.xp >= player.GetXPNeededByLevel(character.currentStats.level))
+                infoCanvas.bossBeatenSection.SetActive(true);
+            }
+            else
+            {
+                infoCanvas.winSection.SetActive(true);
+                foreach (CharacterInstance character in partyData)
                 {
-                    character.currentStats.level++;
+                    character.currentStats.xp += fighters.Where(x => x.actor.team == FightActor.ActorTeam.Enemy).ToList().Select(x => x.instance.character.rpgClass.xpDrop).ToList().Sum();
+                    PlayerCharacter player = (PlayerCharacter)character.character;
+                    if (character.currentStats.xp >= player.GetXPNeededByLevel(character.currentStats.level))
+                    {
+                        character.currentStats.level++;
+                    }
                 }
             }
+            winSfx.Play();
         }
         else
         {
             infoCanvas.loseSection.SetActive(true);
+            loseSfx.Play();
         }
     }
 
@@ -219,7 +230,16 @@ public class FightManager : Singleton<FightManager>
 
         if (usedSkill.target == Skill.Target.Enemy)
         {
-            CharacterInstance target = partyData.Where(x => x.currentStats.hp > 0).ToList()[Random.Range(0, partyData.Where(x => x.currentStats.hp > 0).ToList().Count())];
+            CharacterInstance target;
+            if (difficulty != 4)
+            {
+                target = partyData.Where(x => x.currentStats.hp > 0).ToList()[Random.Range(0, partyData.Where(x => x.currentStats.hp > 0).ToList().Count())];
+            }
+            else
+            {
+                target = partyData.Where(x => x.currentStats.hp > 0).ToList().OrderBy(x => x.currentStats.hp).ToList()[0];
+            }
+            
             int damage = Random.Range((int)usedSkill.skillPowerRange.x, (int)usedSkill.skillPowerRange.y + 1);
             int crit = 1;
             if (Random.Range(1, 101) < source.currentStats.luck) { crit = 2; }
@@ -370,5 +390,12 @@ public class FightManager : Singleton<FightManager>
     {
         GameManager.Instance.party = partyData;
         SceneManager.ChangeScene("Map");
+    }
+
+    public void TurnPass()
+    {
+        playerUI.Hide();
+        playerUI.IsInUse = false;
+        hasInstanceFinishedTurn = true;
     }
 }

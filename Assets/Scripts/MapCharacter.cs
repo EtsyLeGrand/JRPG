@@ -127,6 +127,7 @@ public class MapCharacter : MonoBehaviour
             {
                 case "Walls": yield break;
                 case "Default": yield break;
+                case "Dungeon": GameManager.Instance.isDifficultyOverridden = true; SceneManager.ChangeScene("Fight"); yield break;
 
                 case "Pot": InteractWithPot(collidedObj); yield break;
                 case "Stairs": yield break;
@@ -165,12 +166,6 @@ public class MapCharacter : MonoBehaviour
         {
             //Encounter
             haltQueue = true;
-            //Dictionary<string, object> args = new Dictionary<string, object>()
-            //{
-            //    {"x", transform.localPosition.x},
-            //    {"y", transform.localPosition.y}
-            //};
-            //EventManager.TriggerEvent("RegisterNewMapPosition", args);
             GameManager.Instance.lastSavedPosition = new Vector2(transform.localPosition.x, transform.localPosition.y);
             SceneManager.ChangeScene("Fight", 1, 1);
         }

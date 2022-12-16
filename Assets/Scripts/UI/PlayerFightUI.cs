@@ -50,7 +50,12 @@ public class PlayerFightUI : MonoBehaviour
 
     public void OnFleeButtonClicked()
     {
+        FightManager.Instance.BackToMap();
+    }
 
+    public void OnPassButtonClicked()
+    {
+        FightManager.Instance.TurnPass();
     }
 
     public void OnAttacksButtonClicked()

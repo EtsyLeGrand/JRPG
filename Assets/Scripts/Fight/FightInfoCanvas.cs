@@ -10,6 +10,7 @@ public class FightInfoCanvas : MonoBehaviour
     [SerializeField] private Text hoveredActorName;
     [SerializeField] public GameObject winSection;
     [SerializeField] public GameObject loseSection;
+    [SerializeField] public GameObject bossBeatenSection;
 
     public void SetDisplayInfo(int index)
     {

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5a8d174474e684c8774ae9b3b4d011, type: 3}
   m_Name: Skeleton (Class)
   m_EditorClassIdentifier: 
+  xp: 0
+  xpDrop: 3
   className: Skeleton
   stats:
     strength:

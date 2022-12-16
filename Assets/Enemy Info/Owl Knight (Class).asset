@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5a8d174474e684c8774ae9b3b4d011, type: 3}
   m_Name: Owl Knight (Class)
   m_EditorClassIdentifier: 
+  xp: 0
+  xpDrop: 15
   className: Owl Knight
   stats:
     strength:
